@@ -34,12 +34,21 @@ The project has two Google Apps Script files:
 ## Quick start
 
 1. (Optional) Create a folder named `SBC-ticket-system` in your Google Drive (My Drive). The setup script creates it if it does not exist.
-2. Download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs` from the [latest release](https://github.com/banting-sbc/SBC-ticket-system/releases).
+2. Download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs` from the [latest release](https://github.com/banting-sbc/SBC-ticket-system/releases). If the scripts are not available in the releases section, reach out to the repo owner.
 3. At [script.google.com](https://script.google.com), create a new project (name it after the show), paste in `Create_Ticket_Form.gs`, fill in the input section at the top, and run `createReservationForm`. If a download fails because of GitHub API limits, run it again.
 4. Optionally add your own images to `global_assets` (whole group) or `show_assets` (one show). Images in `show_assets` take precedence. File names must match exactly, for example `header`, `banner`, `bank-info`, `bank-qr`, with a `.png` or `.jpg` extension.
 5. Open the new spreadsheet, go to **Extensions > Apps Script**, paste in `Code_Ticket_Sheet.gs`, save, then run `setupSheets` followed by `createAllTriggers`.
 
-For the full walkthrough, including the required images, recommended sizes and troubleshooting, see the [setup guide](SBC_Ticket_System_Setup_Guide.md).
+For the full walkthrough, see the [Setup Guide](SBC_Ticket_System_Setup_Guide.md). Once the system is running, see [How to Use](SBC_Ticket_System_How_to_Use.md).
+
+## Documentation
+
+| Guide | For | Contents |
+|-------|-----|----------|
+| [Setup Guide](SBC_Ticket_System_Setup_Guide.md) | Show admins | Requirements, required images, creating the form and spreadsheet, installing the scripts and triggers, troubleshooting |
+| [How to Use](SBC_Ticket_System_How_to_Use.md) | Show admins | The reservation process from responder link to tickets, statuses, ticket limit and waitlist, early bird pricing, timing |
+
+Both guides are also available as Word (`.docx`) files.
 
 ## Requirements
 
