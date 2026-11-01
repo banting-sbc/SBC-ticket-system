@@ -2,8 +2,6 @@
 
 ## Setup Documentation
 
-**DRAFT – for review**
-
 This guide explains how to set up the ticket reservation system for a show. It uses two Google Apps Script files:
 
 - `Create_Ticket_Form.gs` – run once per show. It creates the Drive folders, the reservation Google Form, the response spreadsheet and a **References** tab that stores every link and setting.
@@ -44,11 +42,11 @@ The automation uses the images below. Create them for your group and show, using
 | Bank transfer infographic | bank-info     | 1080 x 1200 px                | Payment instructions for bank transfers, in infographic format. |
 | Maya infographic          | maya-info     | 1080 x 1200 px                | Payment instructions for Maya payments, in infographic format.  |
 | GCash infographic         | gcash-info    | 1080 x 1200 px                | Payment instructions for GCash payments, in infographic format. |
-| Bank QR                   | bank-qr       | **[TBD]** | QR code for bank transfers.                                     |
-| Maya QR                   | maya-qr       | **[TBD]** | QR code for Maya payments.                                      |
-| GCash QR                  | gcash-qr      | **[TBD]** | QR code for GCash payments.                                     |
+| Bank QR                   | bank-qr       |      | QR code for bank transfers.                                     |
+| Maya QR                   | maya-qr       |      | QR code for Maya payments.                                      |
+| GCash QR                  | gcash-qr      |      | QR code for GCash payments.                                     |
 
-The script also requires three social icons – facebook, instagram and twitter – which are shown in the email footer. Default versions are downloaded automatically from GitHub, so you only need to supply your own if you want different icons. **[Recommended size: TBD]**
+The script also requires three social icons – facebook, instagram and twitter – which are shown in the email footer. Default versions are downloaded automatically from GitHub, so you only need to supply your own if you want different icons. **[Recommended size: 80 x 80 px]**
 
 ## 1.4 How the asset folders work
 
@@ -72,9 +70,11 @@ The setup has three steps, to be done in this order, after downloading the scrip
 
 2.  Select the latest release (currently **v1.0.0**).
 
-3.  Under **Assets**, download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`. **[Confirm exact asset names]**
+3.  Under **Assets**, download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`.
 
-4.  Open each file in a text editor so you can copy its full contents later. Do not edit the code; only the input section of `Create_Ticket_Form.gs` is changed in Step 1.
+4.  If the releases are not available, reach out to the repo owner.
+
+5.  Open each file in a text editor so you can copy its full contents later. Do not edit the code; only the input section of `Create_Ticket_Form.gs` is changed in Step 1.
 
 Use the latest release each time you set up a new show, so you get the most recent fixes.
 
