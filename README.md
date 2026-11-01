@@ -39,14 +39,14 @@ The project has two Google Apps Script files:
 4. Optionally add your own images to `global_assets` (whole group) or `show_assets` (one show). Images in `show_assets` take precedence. File names must match exactly, for example `header`, `banner`, `bank-info`, `bank-qr`, with a `.png` or `.jpg` extension.
 5. Open the spreadsheet created by the first script, go to **Extensions > Apps Script**, paste in the contents of the 2nd script, `Code_Ticket_Sheet.gs`, save, then run the `setupSheets` function followed by `createAllTriggers` function.
 
-For the full walkthrough, see the [Setup Guide](SBC_Ticket_System_Setup_Guide.md). Once the system is running, see [How to Use](SBC_Ticket_System_How_to_Use.md).
+For the full walkthrough, see the [Setup Guide](https://github.com/banting-sbc/SBC-ticket-system/blob/main/documentation/SBC_Ticket_System_Setup_Guide.md). Once the system is running, see [How to Use](https://github.com/banting-sbc/SBC-ticket-system/blob/main/documentation/SBC_Ticket_System_How_to_Use.md).
 
 ## Documentation
 
 | Guide | For | Contents |
 |-------|-----|----------|
-| [Setup Guide](SBC_Ticket_System_Setup_Guide.md) | Show admins | Requirements, required images, creating the form and spreadsheet, installing the scripts and triggers, troubleshooting |
-| [How to Use](SBC_Ticket_System_How_to_Use.md) | Show admins | The reservation process from responder link to tickets, statuses, ticket limit and waitlist, early bird pricing, timing |
+| [Setup Guide](https://github.com/banting-sbc/SBC-ticket-system/blob/main/documentation/SBC_Ticket_System_Setup_Guide.md) | Show admins | Requirements, required images, creating the form and spreadsheet, installing the scripts and triggers, troubleshooting |
+| [How to Use](https://github.com/banting-sbc/SBC-ticket-system/blob/main/documentation/SBC_Ticket_System_How_to_Use.md) | Show admins | The reservation process from responder link to tickets, statuses, ticket limit and waitlist, early bird pricing, timing |
 
 Both guides are also available as Word (`.docx`) files.
 
