@@ -192,16 +192,6 @@ My Drive
 
 Values you type into the Counters tab yourself are never overwritten when the function is run again.
 
-### How early bird pricing works
-
-When `earlyBirdEnabled` is Yes (field **Early Bird Enabled** in the Counters tab), each new reservation is priced at the **Early Bird Ticket Price** until **either** of these limits is passed:
-
-- **Early Bird Ticket Number Limit** – the number of early bird tickets already reserved reaches the limit.
-
-- **Early Bird Ticket Date/Time Limit** – the reservation was submitted after this date and time. The form submission time is used, so a reservation submitted before the cutoff still gets the early bird price even if it is processed later.
-
-Once a limit is passed, the Early Bird Enabled field changes to Exceeded and all later reservations use the normal ticket price. If the field is No, early bird pricing is not used.
-
 ### What `createAllTriggers` does
 
 It creates the timed triggers that run the automation. It is safe to run again: triggers that already exist are skipped.
