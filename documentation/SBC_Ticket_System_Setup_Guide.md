@@ -2,7 +2,7 @@
 
 ## Setup Documentation
 
-****DRAFT – for review****
+**DRAFT – for review**
 
 This guide explains how to set up the ticket reservation system for a show. It uses two Google Apps Script files:
 
@@ -27,7 +27,7 @@ Figures are taken from Google's Apps Script quotas page and may change: https://
 
 ## 1.2 Other prerequisites
 
-- A folder named **SBC-ticket-system** in the **My Drive** of the account that will run the scripts. Create it manually before the first run – the script stops if it cannot find it.
+- A folder named **SBC-ticket-system** in the **My Drive** of the account that will run the scripts. If it does not exist, the setup script creates it for you.
 
 - The two script files, `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`, downloaded from the GitHub releases page (see "Before you start" in section 2).
 
@@ -72,11 +72,9 @@ The setup has three steps, to be done in this order, after downloading the scrip
 
 2.  Select the latest release (currently **v1.0.0**).
 
-3.  Under **Assets**, download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`.
+3.  Under **Assets**, download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`. **[Confirm exact asset names]**
 
-4.  If the release is not available in the Github repo, reach out to the admin and request for a copy of the scripts.
-
-5.  Open each file in a text editor so you can copy its full contents later. Do not edit the code; only the input section of `Create_Ticket_Form.gs` is changed in Step 1.
+4.  Open each file in a text editor so you can copy its full contents later. Do not edit the code; only the input section of `Create_Ticket_Form.gs` is changed in Step 1.
 
 Use the latest release each time you set up a new show, so you get the most recent fixes.
 
@@ -98,31 +96,35 @@ Use the latest release each time you set up a new show, so you get the most rece
 
 ### Input section
 
-| **Field**                                                 | **Description**                                                                       | **Example**                       |
-|-----------------------------------------------------------|---------------------------------------------------------------------------------------|-----------------------------------|
-| `showName` | Name of the show. Used for the form, the spreadsheet and the show folder.             | 'Summer Sessions'                 |
-| `showPrefix` | Prefix of the reservation IDs.                                                        | 'SBC'                             |
-| `ticketPriceOnline` | Online ticket price (number).                                                         | 500                               |
-| `ticketPriceDoor` | Ticket price at the door (number).                                                    | 600                               |
-| `ticketLimit` | Total number of tickets (number). Reservations beyond it are waitlisted.              | 150                               |
-| `bankName` | Name of the bank. If filled in, the payment option reads "Bank Transfer (Bank Name)". | 'BDO'                             |
-| `bankAccountName` | Name on the bank account.                                                             | 'Juan Dela Cruz'                  |
-| `bankAccountNumber` | Bank account number. Keep it in quotes so leading zeros are kept.                     | '001234567890'                    |
-| `gcashNumber` | GCash mobile number. Keep it in quotes.                                               | '09171234567'                     |
-| `paypalLink` | PayPal payment link.                                                                  | 'https://paypal.me/…'             |
-| `paypalTransactionFee` | PayPal transaction fee per ticket (number).                                           | 25                                |
-| `showDate` | Date of the show, in the format Month dd, YYYY.                                       | 'July 12, 2025'                   |
-| `facebookUrl`, `twitterUrl`, `instagramUrl` | Profile links for the email footer icons.                                             | 'https://facebook.com/…'          |
-| `emailSenderName` | Sender name shown on the emails.                                                      | 'Sleeping Boy Collective Tickets' |
-| `enableBankTransfer`, `enableMaya`, `enableGCash`, `enablePaypal` | Payment options to offer in the form: 'Yes' or 'No'. At least one must be Yes.        | 'Yes' / 'No'                      |
+| **Field**                                                 | **Description**                                                                                                                          | **Example**                       |
+|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `showName` | Name of the show. Used for the form, the spreadsheet and the show folder.                                                                | 'Summer Sessions'                 |
+| `showPrefix` | Prefix of the reservation IDs.                                                                                                           | 'SBC'                             |
+| `ticketPriceOnline` | Online ticket price (number).                                                                                                            | 500                               |
+| `ticketPriceDoor` | Ticket price at the door (number).                                                                                                       | 600                               |
+| `ticketLimit` | Total number of tickets (number). Reservations beyond it are waitlisted.                                                                 | 150                               |
+| `bankName` | Name of the bank. If filled in, the payment option reads "Bank Transfer (Bank Name)".                                                    | 'BDO'                             |
+| `bankAccountName` | Name on the bank account.                                                                                                                | 'Juan Dela Cruz'                  |
+| `bankAccountNumber` | Bank account number. Keep it in quotes so leading zeros are kept.                                                                        | '001234567890'                    |
+| `gcashNumber` | GCash mobile number. Keep it in quotes.                                                                                                  | '09171234567'                     |
+| `paypalLink` | PayPal payment link.                                                                                                                     | 'https://paypal.me/…'             |
+| `paypalTransactionFee` | PayPal transaction fee per ticket (number).                                                                                              | 25                                |
+| `showDate` | Date of the show, in the format Month dd, YYYY.                                                                                          | 'July 12, 2025'                   |
+| `facebookUrl`, `twitterUrl`, `instagramUrl` | Profile links for the email footer icons.                                                                                                | 'https://facebook.com/…'          |
+| `emailSenderName` | Sender name shown on the emails.                                                                                                         | 'Sleeping Boy Collective Tickets' |
+| `earlyBirdEnabled` | Turns early bird pricing on: 'Yes' or 'No'. Anything other than 'Yes' is treated as 'No'. If 'Yes', the three fields below are required. | 'No'                              |
+| `earlyBirdTicketLimit` | Number of tickets sold at the early bird price (whole number).                                                                           | 50                                |
+| `earlyBirdDateTimeLimit` | Last moment the early bird price applies. Format YYYY-MM-DD HH:mm, 24-hour clock, in your own time zone.                                 | '2026-12-01 23:59'                |
+| `earlyBirdTicketPrice` | Early bird ticket price (number).                                                                                                        | 400                               |
+| `enableBankTransfer`, `enableMaya`, `enableGCash`, `enablePaypal` | Payment options to offer in the form: 'Yes' or 'No'. At least one must be Yes.                                                           | 'Yes' / 'No'                      |
 
 Fields still showing a placeholder such as \<BANK NAME HERE\> are ignored when the spreadsheet is filled in later.
 
 ### What the script does
 
-1.  Checks the Yes/No payment inputs. It stops with a message if a value is invalid or no option is enabled.
+1.  Checks the inputs. It stops with a message if a payment option value is invalid or none is enabled, or if early bird pricing is set to Yes but its limit, date/time or price is missing or invalid.
 
-2.  Looks for the **SBC-ticket-system** folder in My Drive. If it is missing, the script stops and nothing is created.
+2.  Looks for the **SBC-ticket-system** folder in My Drive and **creates it if missing**.
 
 3.  Looks for the **email_html_templates** folder inside it and **creates it if missing**. It then checks for the eight email templates and **downloads any missing ones from GitHub**: Reminder.html, ReservationCancelled.html, ReservationReceived_BANK.html, ReservationReceived_GCash.html, ReservationReceived_Paypal.html, TicketConfirmed.html, TicketPDF.html and Waitlisted.html.
 
@@ -130,7 +132,7 @@ Fields still showing a placeholder such as \<BANK NAME HERE\> are ignored when t
 
 5.  Stops if a folder with the same show name already exists inside `SBC-ticket-system`, so that nothing is overwritten.
 
-6.  Creates the **Google Form** with the reservation questions and the payment options you enabled, and the linked **response spreadsheet**.
+6.  Creates the **Google Form** with the reservation questions and the payment options you enabled, and the linked **response spreadsheet**. The spreadsheet uses the time zone of the account running the script, so response timestamps are in local time; the time zone is saved in the References tab.
 
 7.  Creates the **show folder** inside `SBC-ticket-system`, with a QR subfolder (generated ticket QR codes and PDFs) and an empty `show_assets` subfolder, and moves the form and spreadsheet into it.
 
@@ -180,7 +182,7 @@ My Drive
 
 - Creates the **Tracking**, **Tickets** and **Counters** tabs.
 
-- Fills the **Counters** tab with the show settings from the References tab: show name and prefix, ticket price and limit, bank details, GCash number, PayPal link and fee, show date, social links, email sender name and the QR folder ID. It also stores the email template IDs.
+- Fills the **Counters** tab with the show settings from the References tab: show name and prefix, ticket price and limit, bank details, GCash number, PayPal link and fee, show date, social links, email sender name, the early bird settings and the QR folder ID. It also stores the email template IDs.
 
 - Looks up the images in `show_assets` and then `global_assets`, and writes their links to the Counters tab (header, banner, bank / Maya / GCash QR and infographic, and the social icons).
 
@@ -189,6 +191,16 @@ My Drive
 - Locks the counter cells that are filled by the script or by formulas, so they cannot be edited by hand.
 
 Values you type into the Counters tab yourself are never overwritten when the function is run again.
+
+### How early bird pricing works
+
+When `earlyBirdEnabled` is Yes (field **Early Bird Enabled** in the Counters tab), each new reservation is priced at the **Early Bird Ticket Price** until **either** of these limits is passed:
+
+- **Early Bird Ticket Number Limit** – the number of early bird tickets already reserved reaches the limit.
+
+- **Early Bird Ticket Date/Time Limit** – the reservation was submitted after this date and time. The form submission time is used, so a reservation submitted before the cutoff still gets the early bird price even if it is processed later.
+
+Once a limit is passed, the Early Bird Enabled field changes to Exceeded and all later reservations use the normal ticket price. If the field is No, early bird pricing is not used.
 
 ### What `createAllTriggers` does
 
@@ -208,7 +220,7 @@ The reminder email trigger (`sendReminderEmail`) is switched off in the script b
 
 | **Problem**                                                                       | **What to do**                                                                                                                                            |
 |-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| "Folder `SBC-ticket-system` was not found"                                          | Create a folder with exactly that name in My Drive, then run the script again.                                                                            |
+| "`earlyBirdEnabled` is 'Yes', so all early bird values are required"                | Fill in earlyBirdTicketLimit, earlyBirdDateTimeLimit (format YYYY-MM-DD HH:mm) and earlyBirdTicketPrice, or set `earlyBirdEnabled` to 'No'.                 |
 | GitHub error, or "Could not get global asset image(s)" / template download failed | Wait a few minutes and run the script again. If a file is reported as not found in GitHub, check that it exists in the repository with the expected name. |
 | "A folder named … already exists"                                                 | Change `showName`, or rename or remove the existing show folder.                                                                                            |
 | Image links in the Counters tab are empty                                         | Check the file names and the folder they are in (sections 1.3 and 1.4), then run `setupSheets` again.                                                       |
