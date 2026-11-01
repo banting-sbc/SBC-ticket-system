@@ -2,8 +2,6 @@
 
 ## How to Use
 
-**DRAFT – for review**
-
 This guide explains how to run a ticket reservation once the system has been set up (see the [**Setup Guide**](SBC_Ticket_System_Setup_Guide.md)). It is written for the **show admin**, the person who manages reservations and payments. The people buying tickets are called **showgoers**.
 
 The show admin works mainly in the **Tracking** tab of the response spreadsheet. Everything else – reservation IDs, prices, emails, tickets – is done by the system.
