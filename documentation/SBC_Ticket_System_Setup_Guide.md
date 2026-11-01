@@ -72,9 +72,11 @@ The setup has three steps, to be done in this order, after downloading the scrip
 
 2.  Select the latest release (currently **v1.0.0**).
 
-3.  Under **Assets**, download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`. **[Confirm exact asset names]**
+3.  Under **Assets**, download `Create_Ticket_Form.gs` and `Code_Ticket_Sheet.gs`.
 
-4.  Open each file in a text editor so you can copy its full contents later. Do not edit the code; only the input section of `Create_Ticket_Form.gs` is changed in Step 1.
+4.  If the release is not available in the Github repo, reach out to the admin and request for a copy of the scripts.
+
+5.  Open each file in a text editor so you can copy its full contents later. Do not edit the code; only the input section of `Create_Ticket_Form.gs` is changed in Step 1.
 
 Use the latest release each time you set up a new show, so you get the most recent fixes.
 
