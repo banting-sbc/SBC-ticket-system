@@ -48,7 +48,7 @@ The automation uses the images below. Create them for your group and show, using
 
 The script also requires three social icons – facebook, instagram and twitter – which are shown in the email footer. Default versions are downloaded automatically from GitHub, so you only need to supply your own if you want different icons. **[Recommended size: 80 x 80 px]**
 
-<img width="722" height="1086" alt="email-template-updated" src="https://github.com/user-attachments/assets/59427599-4923-4dfb-a2fe-eb8e90f47f86" />
+<img width="722" height="1086" alt="691679978-59427599-4923-4dfb-a2fe-eb8e90f47f86" src="https://github.com/user-attachments/assets/4d131d51-60b5-42a9-ad82-c331034d7afe" />
 
 ## 1.4 How the asset folders work
 
