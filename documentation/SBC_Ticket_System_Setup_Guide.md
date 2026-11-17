@@ -48,7 +48,7 @@ The automation uses the images below. Create them for your group and show, using
 
 The script also requires three social icons – facebook, instagram and twitter – which are shown in the email footer. Default versions are downloaded automatically from GitHub, so you only need to supply your own if you want different icons. **[Recommended size: 80 x 80 px]**
 
-<img width="722" height="1086" alt="email-template-updated" src="https://github.com/user-attachments/assets/db15a458-fca1-4663-8ab4-8c36579f6f7c" />
+<img width="722" height="1086" alt="email-template-updated" src="https://github.com/user-attachments/assets/59427599-4923-4dfb-a2fe-eb8e90f47f86" />
 
 ## 1.4 How the asset folders work
 
@@ -105,26 +105,46 @@ Use the latest release each time you set up a new show, so you get the most rece
 | `ticketPriceOnline` | Online ticket price (number).                                                                                                            | 500                               |
 | `ticketPriceDoor` | Ticket price at the door (number).                                                                                                       | 600                               |
 | `ticketLimit` | Total number of tickets (number). Reservations beyond it are waitlisted.                                                                 | 150                               |
-| `bankName` | Name of the bank. If filled in, the payment option reads "Bank Transfer (Bank Name)".                                                    | 'BDO'                             |
-| `bankAccountName` | Name on the bank account.                                                                                                                | 'Juan Dela Cruz'                  |
-| `bankAccountNumber` | Bank account number. Keep it in quotes so leading zeros are kept.                                                                        | '001234567890'                    |
-| `gcashNumber` | GCash mobile number. Keep it in quotes.                                                                                                  | '09171234567'                     |
-| `paypalLink` | PayPal payment link.                                                                                                                     | 'https://paypal.me/…'             |
-| `paypalTransactionFee` | PayPal transaction fee per ticket (number).                                                                                              | 25                                |
 | `showDate` | Date of the show, in the format Month dd, YYYY.                                                                                          | 'July 12, 2025'                   |
-| `facebookUrl`, `twitterUrl`, `instagramUrl` | Profile links for the email footer icons.                                                                                                | 'https://facebook.com/…'          |
 | `emailSenderName` | Sender name shown on the emails.                                                                                                         | 'Sleeping Boy Collective Tickets' |
 | `earlyBirdEnabled` | Turns early bird pricing on: 'Yes' or 'No'. Anything other than 'Yes' is treated as 'No'. If 'Yes', the three fields below are required. | 'No'                              |
 | `earlyBirdTicketLimit` | Number of tickets sold at the early bird price (whole number).                                                                           | 50                                |
 | `earlyBirdDateTimeLimit` | Last moment the early bird price applies. Format YYYY-MM-DD HH:mm, 24-hour clock, in your own time zone.                                 | '2026-12-01 23:59'                |
 | `earlyBirdTicketPrice` | Early bird ticket price (number).                                                                                                        | 400                               |
 | `enableBankTransfer`, `enableMaya`, `enableGCash`, `enablePaypal` | Payment options to offer in the form: 'Yes' or 'No'. At least one must be Yes.                                                           | 'Yes' / 'No'                      |
+| `bankName` | Name of the bank. If filled in, the payment option reads "Bank Transfer (Bank Name)".                                                    | 'BDO'                             |
+| `bankAccountName` | Name on the bank account.                                                                                                                | 'Juan Dela Cruz'                  |
+| `bankAccountNumber` | Bank account number. Keep it in quotes so leading zeros are kept.                                                                        | '001234567890'                    |
+| `gcashNumber` | GCash mobile number. Keep it in quotes.                                                                                                  | '09171234567'                     |
+| `paypalLink` | PayPal payment link.                                                                                                                     | 'https://paypal.me/…'             |
+| `paypalTransactionFee` | PayPal transaction fee per ticket (number).                                                                                              | 25                                |
+| `facebookUrl`, `twitterUrl`, `instagramUrl` | Profile links for the email footer icons.                                                                                                | 'https://facebook.com/…'          |
 
-Fields still showing a placeholder such as \<BANK NAME HERE\> are ignored when the spreadsheet is filled in later.
+Fields still showing a placeholder such as \<BANK NAME HERE\> are ignored when the spreadsheet is filled in later, **except** the ones the script requires (see below).
+
+**Rules for editing the input section**
+
+- Change only the value between the `=` sign and the `;` at the end of the line.
+- Text values keep their quotes, for example `'Summer Sessions'`. Number values have **no** quotes, for example `500`.
+- Every line ends with a semicolon (`;`).
+- Do not put an apostrophe (`'`) inside a text value, and use plain straight quotes only (not the curly quotes that Word or chat apps produce).
+- Do not delete any line, even if you do not use the value.
+
+**Automatic input check.** When you run `createReservationForm`, the script first checks every value in the input section. If anything is wrong it creates nothing and shows one message that lists every problem, for example `ticketPriceOnline: must be a number WITHOUT quotes` or `bankAccountNumber: must be text inside quotes`. Fix the lines listed and run again. The check covers:
+
+- Required values: `showName`, `showPrefix`, `emailSenderName`, `showDate`, the three ticket numbers (greater than 0, and `ticketLimit` a whole number), and the payment details of every option set to 'Yes' (bank account name and number, GCash number, PayPal link).
+- Numbers written with quotes, and text written without quotes. An unquoted account or GCash number loses its leading zero.
+- Quotes, semicolons, backticks, spaces or line breaks that ended up inside a value.
+- `showPrefix`: letters, numbers, hyphen and underscore only.
+- `showDate`: a real date written as `Month dd, YYYY`, for example `July 12, 2025`.
+- Social media links: optional, but must start with `http://` or `https://`.
+- The Yes/No switches: only 'Yes' or 'No'.
+
+> **What the check cannot catch:** if a closing quote is deleted or an apostrophe is typed inside a value (`'Banting's Show'`), the code itself is broken and Google Apps Script refuses to run the file. It shows a **SyntaxError** with a line number instead of the check's message. Go to that line and compare it with the lines around it. To use an apostrophe in a text value, write it as `\'`. A missing semicolon at the end of a line is harmless.
 
 ### What the script does
 
-1.  Checks the inputs. It stops with a message if a payment option value is invalid or none is enabled, or if early bird pricing is set to Yes but its limit, date/time or price is missing or invalid.
+1.  Checks the inputs. It stops before creating anything and lists every problem found: missing, misplaced or badly formatted values (see the automatic input check above), an invalid payment option value or no option enabled, or early bird pricing set to Yes with a limit, date/time or price that is missing or invalid.
 
 2.  Looks for the **SBC-ticket-system** folder in My Drive and **creates it if missing**.
 
@@ -194,6 +214,16 @@ My Drive
 
 Values you type into the Counters tab yourself are never overwritten when the function is run again.
 
+### How early bird pricing works
+
+When `earlyBirdEnabled` is Yes (field **Early Bird Enabled** in the Counters tab), each new reservation is priced at the **Early Bird Ticket Price** until **either** of these limits is passed:
+
+- **Early Bird Ticket Number Limit** – the number of early bird tickets already reserved reaches the limit.
+
+- **Early Bird Ticket Date/Time Limit** – the reservation was submitted after this date and time. The form submission time is used, so a reservation submitted before the cutoff still gets the early bird price even if it is processed later.
+
+Once a limit is passed, the Early Bird Enabled field changes to Exceeded and all later reservations use the normal ticket price. If the field is No, early bird pricing is not used.
+
 ### What `createAllTriggers` does
 
 It creates the timed triggers that run the automation. It is safe to run again: triggers that already exist are skipped.
@@ -212,6 +242,8 @@ The reminder email trigger (`sendReminderEmail`) is switched off in the script b
 
 | **Problem**                                                                       | **What to do**                                                                                                                                            |
 |-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| "Please fix N problem(s) in the EDIT THIS BEFORE EACH RUN section" | Nothing was created. Read the numbered list, correct each line named in it and run `createReservationForm` again. |
+| SyntaxError with a line number (for example "Unexpected identifier" or "Invalid or unexpected token") | A quote is missing, doubled or curly, or an apostrophe is inside a value. Fix the line shown, comparing it with the lines around it. |
 | "`earlyBirdEnabled` is 'Yes', so all early bird values are required"                | Fill in earlyBirdTicketLimit, earlyBirdDateTimeLimit (format YYYY-MM-DD HH:mm) and earlyBirdTicketPrice, or set `earlyBirdEnabled` to 'No'.                 |
 | GitHub error, or "Could not get global asset image(s)" / template download failed | Wait a few minutes and run the script again. If a file is reported as not found in GitHub, check that it exists in the repository with the expected name. |
 | "A folder named … already exists"                                                 | Change `showName`, or rename or remove the existing show folder.                                                                                            |
